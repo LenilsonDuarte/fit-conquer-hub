@@ -6,11 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { User, Mail, Phone, MapPin, Target, Calendar } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { User, Mail, Phone, MapPin, Target, Calendar, Trophy } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
-  const { toast } = useToast();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,34 +33,13 @@ const SignUpForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.agreeTerms) {
-      toast({
-        title: "Termos obrigatórios",
-        description: "Você deve aceitar os termos e condições para continuar.",
-        variant: "destructive",
-      });
       return;
     }
 
-    toast({
-      title: "Cadastro realizado com sucesso! 🏆",
-      description: "Em breve entraremos em contato para agendar sua aula experimental gratuita!",
-    });
-
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      birthDate: "",
-      address: "",
-      experience: "",
-      goals: "",
-      medicalConditions: "",
-      agreeTerms: false,
-      agreeMarketing: false,
-    });
+    // Redirecionar para a página de inscrição no torneio
+    navigate("/tournament-signup");
   };
 
   return (
@@ -69,21 +48,21 @@ const SignUpForm = () => {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black mb-4 text-jungle-secondary">
-              JUNTE-SE À SELVA
+              INSCREVA-SE NO TORNEIO!🔥
             </h2>
             <p className="text-xl text-jungle-light/80">
-              Cadastre-se e ganhe sua aula experimental gratuita
+              INSCRIÇÃO INDIVIDUAL E EQUIPE!
             </p>
           </div>
 
           <Card className="card-gradient border-jungle-primary/20 card-shadow">
             <CardHeader className="text-center">
               <CardTitle className="text-2xl font-bold text-jungle-secondary flex items-center justify-center gap-2">
-                <User className="h-6 w-6" />
-                Cadastro na Academia
+                <Trophy className="h-6 w-6" />
+                Inscrição no Torneio
               </CardTitle>
             </CardHeader>
-            
+
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Info */}
@@ -232,7 +211,7 @@ const SignUpForm = () => {
                       className="border-jungle-primary/30 data-[state=checked]:bg-jungle-secondary data-[state=checked]:border-jungle-secondary"
                     />
                     <label htmlFor="agreeTerms" className="text-sm text-jungle-light leading-relaxed">
-                      Eu concordo com os <span className="text-jungle-secondary font-semibold cursor-pointer hover:underline">termos e condições</span> e 
+                      Eu concordo com os <span className="text-jungle-secondary font-semibold cursor-pointer hover:underline">termos e condições</span> e
                       estou ciente de que a prática de exercícios físicos envolve riscos. *
                     </label>
                   </div>
@@ -251,18 +230,18 @@ const SignUpForm = () => {
                 </div>
 
                 {/* Submit Button */}
-                <Button 
-                  type="submit" 
-                  variant="hero" 
-                  size="xl" 
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="xl"
                   className="w-full"
                 >
-                  <User className="mr-2 h-5 w-5" />
-                  Cadastrar e Agendar Aula Grátis
+                  <Trophy className="mr-2 h-5 w-5" />
+                  Inscrever-se no Torneio!
                 </Button>
 
                 <p className="text-center text-sm text-jungle-light/60">
-                  🎯 Após o cadastro, entraremos em contato em até 24h para agendar sua aula experimental gratuita!
+                  🏆 Após a inscrição, você será redirecionado para o pagamento do torneio!
                 </p>
               </form>
             </CardContent>

@@ -1,30 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Dumbbell, Trophy, Users, Target } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-bg.jpg";
 import mascotImage from "@/assets/mascot.png";
 
 const Hero = () => {
-  const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleSignUp = () => {
-    toast({
-      title: "Cadastro iniciado!",
-      description: "Redirecionando para o formulário de cadastro...",
-    });
+  const handleLogin = () => {
+    navigate("/login");
   };
 
-  const handleTournamentSignUp = () => {
-    toast({
-      title: "Inscrição no torneio!",
-      description: "Prepare-se para o desafio da selva!",
-    });
+  const handleSignUp = () => {
+    navigate("/signup");
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
@@ -32,14 +26,14 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-20 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Mascot */}
-          <div className="mb-8 animate-slide-up">
-            <img 
-              src={mascotImage} 
-              alt="Cross Jungle Inside Mascot" 
-              className="h-32 w-32 mx-auto animate-glow"
+          <div className="mb-18 animate-slide-up relative z-30">
+            <img
+              src={mascotImage}
+              alt="Cross Jungle Inside Mascot"
+              className="h-32 w-32 mx-auto animate-glow relative z-30"
             />
           </div>
 
@@ -91,23 +85,23 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-            <Button 
-              variant="hero" 
-              size="xl" 
-              onClick={handleSignUp}
+            <Button
+              variant="hero"
+              size="xl"
+              onClick={handleLogin}
               className="min-w-[200px]"
             >
               <Dumbbell className="mr-2 h-5 w-5" />
-              Cadastre-se na Academia
+              Entrar
             </Button>
-            <Button 
-              variant="military" 
-              size="xl" 
-              onClick={handleTournamentSignUp}
+            <Button
+              variant="military"
+              size="xl"
+              onClick={handleSignUp}
               className="min-w-[200px]"
             >
               <Trophy className="mr-2 h-5 w-5" />
-              Inscreva-se no Torneio
+              Inscreva-se no Site
             </Button>
           </div>
 
@@ -118,12 +112,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-jungle-secondary rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-jungle-secondary rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </div>
     </section>
   );
 };
